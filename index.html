@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Alerta de Alagamentos</title>
+</head>
+<body>
+    <h1>Alertas de Alagamento</h1>
+
+    <div>
+        <h2>Listagem de Alertas</h2>
+        <ul id="lista-alertas"></ul>
+    </div>
+
+    <div>
+        <h2>Reportar Novo Alagamento</h2>
+        <input type="text" id="localizacao" placeholder="Localização"><br>
+        <input type="text" id="descricao" placeholder="Descrição"><br>
+        <button onclick="enviarAlerta()">Enviar Alerta</button>
+    </div>
+
+    <script>
+        async function carregarAlertas() {
+            const resposta = await fetch('http://localhost:5000/alertas');
+            const alertas = await resposta.json();
+            const lista = document.getElementById('lista-alertas');
+            lista.innerHTML = '';
+            alertas.forEach(alerta => {
+                const li = document.createElement('li');
+                li.textContent = `${alerta.localizacao} - ${alerta.descricao} (${alerta.data_hora})`;
+                lista.appendChild(li);
+            });
+        }
+
+        async function enviarAlerta() {
+            const localizacao = document.getElementById('localizacao').value;
+            const descricao = document.getElementById('descricao').value;
+
+            await fetch('http://localhost:5000/alertas', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ localizacao, descricao })
+            });
+
+            carregarAlertas();
+        }
+
+        carregarAlertas();
+    </script>
+</body>
+</html>

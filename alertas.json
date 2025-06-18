@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "localizacao": "Rua A, Bairro X",
+    "nivel_alarme": "Alto",
+    "descricao": "Risco de alagamento devido a chuvas intensas",
+    "data_hora": "2025-06-18T10:00:00"
+  },
+  {
+    "id": 2,
+    "localizacao": "Avenida B, Bairro Y",
+    "nivel_alarme": "Médio",
+    "descricao": "Possível acumulo de água nas próximas horas",
+    "data_hora": "2025-06-18T11:30:00"
+  }
+]
